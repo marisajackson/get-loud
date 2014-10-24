@@ -1,14 +1,17 @@
 {
-"name": "get loud",
-"description": "Music Playlist app with Angular",
-"version": "0.0.0",
-"homepage": "https://github.com/angular/get-loud",
-"license": "MIT",
-"private": true,
-"dependencies": {
-  "angular": "~1.3.0",
-  "angular-mocks": "~1.3.0",
-  "jquery": "2.1.1",
-  "angular-route": "~1.3.0"
-}
+  "name": "get loud",
+  "description": "Music Playlist app with Angular",
+  "version": "0.0.0",
+  "homepage": "https://github.com/angular/get-loud",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.3.0",
+    "angular-mocks": "~1.3.0",
+    "jquery": "2.1.1",
+    "angular-route": "~1.3.0"
+  },
+  "devDependencies": {
+    "angular-audio": "*"
+  }
 }

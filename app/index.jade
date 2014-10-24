@@ -4,9 +4,28 @@ html(ng-app='getLOUD')
   title getLOUD
   link(href='css/style.css', rel='stylesheet')
 body
-  div(ng-controller='musicCtrl')
-    h1 {{title}}
+  div(ng-controller='eventsCtrl as events')
+
+    #playlist
+      h2 Playlist
+      table
+        thead
+          tr
+            td Artist
+            td Name
+        tbody  
+          tr(ng-repeat='track in tracks' ng-show='track.addedToPlaylist')
+            td {{track.artist}}
+            td {{track.name}}
+
+    #tracks
+      .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
+        img.artist-image(ng-src='{{track.artistImage}}')
+        p {{track.artist}}
+        p {{track.name}}
+        button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
+        button(ng-click='addToPlaylist(track)') Add
 
 script(src='vendor/angular/angular.min.js')
-script(src='vendor/angular-route/angular-route.min.js')  
+script(src='vendor/angular-audio/angular.audio.js')  
 script(src='js/app.js')

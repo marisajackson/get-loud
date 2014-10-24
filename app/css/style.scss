@@ -1,0 +1,30 @@
+$color: rgb(114, 189, 0);
+
+.artist-image {
+  max-height: 75%;
+  max-width: 100%;
+}
+
+.track {
+  width: 200px;
+  height: 350px;
+  display: inline-block;
+  vertical-align: bottom;
+  background-color: $color;
+  border: 4px outset $color;
+  margin: 5px;
+  p { margin: 1px }
+}
+
+#playlist {
+  display: inline-block;
+  width: 20%;
+  vertical-align: top;
+  table tbody tr:nth-child(2n) { background-color: gray }
+}
+
+#tracks {
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+}
