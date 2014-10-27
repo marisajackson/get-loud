@@ -2,9 +2,18 @@ doctype html
 html(ng-app='getLOUD')
   meta(charset='utf-8')
   title getLOUD
+  //- link(href='css/foundation.css', rel='stylesheet')
   link(href='css/style.css', rel='stylesheet')
 body
-  div(ng-controller='eventsCtrl as events')
+  div(ng-controller='dataCtrl as data')
+    #form
+      input(ng-model='city')
+      input(ng-model='state')
+      button(ng-click='getConcerts()') Get Events
+
+    #search
+      //- span Search:
+      //- input(ng-model='query')
 
     #playlist
       h2 Playlist
@@ -14,18 +23,29 @@ body
             td Artist
             td Name
         tbody  
-          tr(ng-repeat='track in tracks' ng-show='track.addedToPlaylist')
+          tr(ng-repeat='track in playlist')
             td {{track.artist}}
             td {{track.name}}
 
     #tracks
+      //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
       .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
         img.artist-image(ng-src='{{track.artistImage}}')
-        p {{track.artist}}
-        p {{track.name}}
-        button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
-        button(ng-click='addToPlaylist(track)') Add
+        .track-info
+          p Artist: {{track.artist}}
+          p Song: {{track.name}}
+          p Event Info:
+          p Date: {{track.event.date | date:'medium'}}
+          p Venue: {{track.event.venue}}
+          a(ng-href='{{track.event.ticket}}') Get Tickets
+          #links
+            button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
+            button(ng-click='addToPlaylist(track)') Add
+      //- button(ng-click="pagination.prevPage()") Previous
+      //- button(ng-click="pagination.nextPage()") Next
 
 script(src='vendor/angular/angular.min.js')
-script(src='vendor/angular-audio/angular.audio.js')  
+script(src='vendor/angular-audio/angular.audio.js')
+script(src='vendor/underscore.min.js')
+script(src='vendor/pagination.js')  
 script(src='js/app.js')
