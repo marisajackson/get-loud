@@ -5,7 +5,13 @@ html(ng-app='getLOUD')
   //- link(href='css/foundation.css', rel='stylesheet')
   link(href='css/style.css', rel='stylesheet')
 body
-  div(ng-controller='dataCtrl as data')
+  #logged-out
+    a(href='/login')
+      h1 Log In With Spotify
+
+
+  div#logged-in(ng-controller='dataCtrl as data')
+    h1#name
     #form
       input(ng-model='city')
       input(ng-model='state')
@@ -47,5 +53,7 @@ body
 script(src='vendor/angular/angular.min.js')
 script(src='vendor/angular-audio/angular.audio.js')
 script(src='vendor/underscore.min.js')
-script(src='vendor/pagination.js')  
+script(src='vendor/jquery-2.1.1.min.js')
+//- script(src='vendor/pagination.js')  
+script(src='js/index.js')
 script(src='js/app.js')

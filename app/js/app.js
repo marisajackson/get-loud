@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  var app = angular.module('getLOUD', ['ngAudio', 'simplePagination']);
+  var app = angular.module('getLOUD', ['ngAudio']);
 
   app.controller('dataCtrl', ['$http', 'ngAudio', '$scope', function($http, ngAudio, $scope){
     var link = 'http://www.corsproxy.com/api.bandsintown.com/events/search?per_page=100',
