@@ -1,13 +1,53 @@
 (function(){
   'use strict';
 
+  function getHashParams(){
+    var hashParams = {},
+        e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    while (e = r.exec(q)){
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
+  }
+
+  var params = getHashParams(),
+      access_token = params.access_token,
+      error = params.error,
+      id;
+
+  if (error){
+    alert('There was an error during the authentication');
+  } else {
+    if (access_token){
+      $.ajax({
+          url: 'https://api.spotify.com/v1/me',
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          },
+          success: function(response){
+            id = response.id;
+            $('#logged-in').show();
+            $('#logged-out').hide();
+            $('#name').text('Welcome ' + response.display_name);
+          }
+      });
+    } else {
+        // render initial screen
+        $('#logged-out').show();
+        $('#logged-in').hide();
+    }
+  }
+
+
   var app = angular.module('getLOUD', ['ngAudio']);
 
   app.controller('dataCtrl', ['$http', 'ngAudio', '$scope', function($http, ngAudio, $scope){
     var link = 'http://www.corsproxy.com/api.bandsintown.com/events/search?per_page=100',
         appId = '&app_id=get_loud',
         events = [],
-        artists = [];
+        artists = [],
+        tracks = [];
 
     $scope.city = 'Nashville';
     $scope.state = 'TN';
@@ -45,7 +85,7 @@
         _.where($scope.tracks, {artist: data.tracks.items[0].artists[0].name}).length < 1 &&   // checks that song hasn't already been added to the array of tracks
         artists.indexOf(data.tracks.items[0].artists[0].name) > -1){            // checks that song is actually by an artist who has an upcoming concert
         var track = {};                                                         // creates new track object
-        track.spotifyId = data.tracks.items[0].id;                              // saves spotify track id
+        track.spotifyId = data.tracks.items[0].uri;                             // saves spotify track id
         track.artist = data.tracks.items[0].artists[0].name;                    // saves artist name
         track.songPreview = ngAudio.load(data.tracks.items[0].preview_url);     // saves track preview url
         track.name = data.tracks.items[0].name;                                 // save track title
@@ -66,6 +106,35 @@
       this.track.addedToPlaylist = true;
       $scope.playlist.push(track);
     };
+
+    $scope.createPlaylist = function(){
+      console.log('CHANGE 4');
+      for (var i = 0; i < $scope.playlist.length; i++) {
+        tracks.push($scope.playlist[i].spotifyId);
+      }
+      $http.post('/createPlaylist/' + access_token + '/' + id, {tracks: tracks});
+    };
+
+    // function makePlaylist(data){
+    //   console.log(data);
+    //   tracks.push(data);
+    //   if(tracks.length === $scope.playlist.length){
+    //     console.log('AJAX CALL');
+    //     $.ajax({
+    //       url: 'http://www.corsproxy.com/api.spotify.com/v1/users/' + id + '/playlists',
+    //       headers: {
+    //           'Authorization': 'Bearer ' + access_token
+    //       },
+    //       data: {
+    //         'name': 'Upcoming Concerts',
+    //         'public': true
+    //       },
+    //       success: function(response){
+    //         console.log(response);
+    //       }
+    //     });
+    //   }
+    // }
 
   }]);
 

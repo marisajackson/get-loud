@@ -11,6 +11,7 @@ var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var bodyParser     = require('body-parser');
 
 var client_id = '59091d264df049f285854d3fbbac9e9b'; // Your client id
 var client_secret = '37bad2cd2f3b4509b7bfac7df20cc5a0'; // Your client secret
@@ -35,6 +36,8 @@ var stateKey = 'spotify_auth_state';
 
 var app = express();
 
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
@@ -44,7 +47,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -115,6 +118,35 @@ app.get('/callback', function(req, res) {
       }
     });
   }
+});
+
+app.post('/createPlaylist/:token/:userId', function(req, res){
+  var token = req.params.token;
+  var id = req.params.userId
+  var tracks = req.body.tracks
+  console.log('THE BODY IS=======================');
+  console.log(req.body);
+  var options = {
+          url: 'https://api.spotify.com/v1/users/' + id + '/playlists',
+          headers: { 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({ 'name' : 'Upcoming Concerts' }),
+          json: true
+        };
+  
+  request.post(options, function(error, response) {
+    var playlistId = response.body.id;
+    var newOptions = {
+      url: 'https://api.spotify.com/v1/users/'+ id +'/playlists/'+ playlistId +'/tracks',
+      headers: { 'Authorization': 'Bearer ' + token , 'Content-Type': 'application/json' },
+      body: tracks,
+      json: true
+    };
+    request.post(newOptions, function(err, response){
+      console.log('HURRAY');
+      console.log(response);
+    });
+
+  });
 });
 
 // app.get('/refresh_token', function(req, res) {
