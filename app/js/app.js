@@ -112,7 +112,15 @@
       for (var i = 0; i < $scope.playlist.length; i++) {
         tracks.push($scope.playlist[i].spotifyId);
       }
-      $http.post('/createPlaylist/' + access_token + '/' + id, {tracks: tracks});
+      $http.post('/createPlaylist/' + access_token + '/' + id, {tracks: tracks}).
+      success(function(data){
+        var playlistUrl = data.playlist.external_urls.spotify;
+        $('#logged-in').hide();
+        $('#success').empty().show();
+        $('#success').append('<h1><a href='+playlistUrl+'>Click Here To Listen To Your Playlist</a></h1>');
+        console.log('the data is:=======');
+        console.log(data.playlist.external_urls.spotify);
+      });
     };
 
     // function makePlaylist(data){

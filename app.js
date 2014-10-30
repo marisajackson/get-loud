@@ -135,6 +135,7 @@ app.post('/createPlaylist/:token/:userId', function(req, res){
   
   request.post(options, function(error, response) {
     var playlistId = response.body.id;
+    var playlist = response.body;
     var newOptions = {
       url: 'https://api.spotify.com/v1/users/'+ id +'/playlists/'+ playlistId +'/tracks',
       headers: { 'Authorization': 'Bearer ' + token , 'Content-Type': 'application/json' },
@@ -142,8 +143,7 @@ app.post('/createPlaylist/:token/:userId', function(req, res){
       json: true
     };
     request.post(newOptions, function(err, response){
-      console.log('HURRAY');
-      console.log(response);
+      res.send({playlist: playlist});
     });
 
   });
