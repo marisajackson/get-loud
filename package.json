@@ -4,7 +4,7 @@
   "description": "Music Playlist app with Angular",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js"
     // "postinstall": "grunt jade && grunt sass && grunt copy"
   },
   "repository": {
