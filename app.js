@@ -16,6 +16,8 @@ var bodyParser     = require('body-parser');
 var client_id = '59091d264df049f285854d3fbbac9e9b'; // Your client id
 var client_secret = '37bad2cd2f3b4509b7bfac7df20cc5a0'; // Your client secret
 var redirect_uri = 'http://getloud.herokuapp.com'; // Your redirect uri
+var port = process.env.PORT || 8888;
+// var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -178,5 +180,5 @@ app.post('/createPlaylist/:token/:userId', function(req, res){
 //   });
 // });
 
-console.log('Listening on 8888');
-app.listen(process.env.PORT);
+console.log('Listening on '+ port);
+app.listen(port);
