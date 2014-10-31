@@ -4,7 +4,8 @@
   "description": "Music Playlist app with Angular",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "./node_modules/.bin/grunt"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,5 @@
     "request": "~2.34.0",
     "body-parser": "^1.9.2",
     "grunt-cli": "^0.1.13"
-  },
-  "postinstall": "./node_modules/.bin/grunt"
+  }
 }
