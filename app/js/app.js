@@ -1,3 +1,5 @@
+/* jshint boss:true*/
+
 (function(){
   'use strict';
 
