@@ -3,8 +3,8 @@ var querystring   = require('querystring'),
     request       = require('request'), // "Request" library
     client_id     = '59091d264df049f285854d3fbbac9e9b', // Your client id
     client_secret = '37bad2cd2f3b4509b7bfac7df20cc5a0', // Your client secret
-// var redirect_uri  = 'http://getloud.herokuapp.com'; // Your redirect uri
-    redirect_uri = 'http://localhost:8888/callback', // Your redirect uri
+    redirect_uri  = 'http://getloud.herokuapp.com/callback', // Your redirect uri
+    // redirect_uri = 'http://localhost:8888/callback', // Your redirect uri
     stateKey = 'spotify_auth_state',
 
 /**
