@@ -1,5 +1,45 @@
 $color: rgb(114, 189, 0);
 
+body#home {
+  background-image: url('../assets/bg.png');
+  background-size: cover;
+  font-family: 'Permanent Marker', cursive;
+}
+
+#login {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#login button {
+  width: 350px;
+  border: none;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: 30px;
+  border-radius: 40px;
+  background-color: #FFA400;
+  font-family: 'Coming Soon';
+}
+
+#icon {
+  display: inline-block;
+  background-image: url('../assets/spotify-icon.png');
+  background-size: contain;
+  height: 50px;
+  vertical-align: middle;
+  width: 50px;
+  margin-left: 5px;
+}
+
+#title {
+  width: 60%;
+  display: inline-block;
+  font-size: 100px;
+  text-align: center;
+  margin-top: 100px;
+}
+
 #logged-in {
   display: none;
 }

@@ -2,12 +2,15 @@ doctype html
 html(ng-app='getLOUD')
   meta(charset='utf-8')
   title getLOUD
-  //- link(href='css/foundation.css', rel='stylesheet')
-  link(href='css/style.css', rel='stylesheet')
-body
+link(href='http://fonts.googleapis.com/css?family=Permanent+Marker|Coming+Soon' rel='stylesheet' type='text/css')  
+link(href='css/style.css', rel='stylesheet')
+body#home
   #logged-out
-    a(href='/login')
-      h1 Log In With Spotify
+    h1#title Get Loud!
+    #login
+      a(href='/login')
+        button Log In With Spotify
+          #icon
 
 
   div#logged-in(ng-controller='dataCtrl as data')
