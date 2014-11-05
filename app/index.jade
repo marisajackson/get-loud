@@ -4,8 +4,8 @@ html(ng-app='getLOUD')
   title getLOUD
 link(href='http://fonts.googleapis.com/css?family=Permanent+Marker|Coming+Soon' rel='stylesheet' type='text/css')  
 link(href='css/style.css', rel='stylesheet')
-body#home
-  #logged-out
+body#home(ng-controller='viewCtrl as view')
+  #logged-out(ng-hide='view.loggedIn()')
     h1#title Get Loud!
     #login
       a(href='/login')
@@ -13,46 +13,47 @@ body#home
           #icon
 
 
-  div#logged-in(ng-controller='dataCtrl as data')
-    h1#name
-    #form
-      input(ng-model='city')
-      input(ng-model='state')
-      button(ng-click='getConcerts()') Get Events
+  div#logged-in(ng-show='view.loggedIn()')
+    #events(ng-controller='dataCtrl as data')
+      h1#name
+      #form
+        input(ng-model='city')
+        input(ng-model='state')
+        button(ng-click='getConcerts()') Get Events
 
-    #search
-      //- span Search:
-      //- input(ng-model='query')
+      #search
+        //- span Search:
+        //- input(ng-model='query')
 
-    #playlist
-      h2 Playlist
-      button(ng-click='createPlaylist()') Create Playlist
-      table
-        thead
-          tr
-            td Artist
-            td Name
-        tbody  
-          tr(ng-repeat='track in playlist')
-            td {{track.artist}}
-            td {{track.name}}
+      #playlist
+        h2 Playlist
+        button(ng-click='createPlaylist()') Create Playlist
+        table
+          thead
+            tr
+              td Artist
+              td Name
+          tbody  
+            tr(ng-repeat='track in playlist')
+              td {{track.artist}}
+              td {{track.name}}
 
-    #tracks
-      //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
-      .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
-        img.artist-image(ng-src='{{track.artistImage}}')
-        .track-info
-          p Artist: {{track.artist}}
-          p Song: {{track.name}}
-          p Event Info:
-          p Date: {{track.event.date | date:'medium'}}
-          p Venue: {{track.event.venue}}
-          a(ng-href='{{track.event.ticket}}') Get Tickets
-          #links
-            button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
-            button(ng-click='addToPlaylist(track)') Add
-      //- button(ng-click="pagination.prevPage()") Previous
-      //- button(ng-click="pagination.nextPage()") Next
+      #tracks
+        //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
+        .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
+          img.artist-image(ng-src='{{track.artistImage}}')
+          .track-info
+            p Artist: {{track.artist}}
+            p Song: {{track.name}}
+            p Event Info:
+            p Date: {{track.event.date | date:'medium'}}
+            p Venue: {{track.event.venue}}
+            a(ng-href='{{track.event.ticket}}') Get Tickets
+            #links
+              button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
+              button(ng-click='addToPlaylist(track)') Add
+        //- button(ng-click="pagination.prevPage()") Previous
+        //- button(ng-click="pagination.nextPage()") Next
   #success
 
 script(src='js/vendor/angular/angular.min.js')
