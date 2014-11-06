@@ -51,6 +51,16 @@
         return false;
       }
     };
+
+    this.display = function(){
+      var id = authFactory.id,
+          tracks = $('#tracks').children().length;
+      if(tracks < 1 || !id){
+        return 'no-events';
+      } else {
+        return '';
+      }
+    };
   }]);
 
 

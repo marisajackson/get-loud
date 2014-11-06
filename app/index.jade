@@ -13,13 +13,15 @@ body#home(ng-controller='viewCtrl as view')
           #icon
 
 
-  div#logged-in(ng-show='view.loggedIn()')
+  div#logged-in(ng-show='view.loggedIn()' ng-class='view.display()')
     #events(ng-controller='dataCtrl as data')
-      h1#name
-      #form
+      #event-form
+        .header
+          h1 Find Artists
+          h1 With Upcoming Concerts
         input(ng-model='city')
         input(ng-model='state')
-        button(ng-click='getConcerts()') Get Events
+        button(ng-click='getConcerts()') Get Songs
 
       #search
         //- span Search:

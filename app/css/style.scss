@@ -3,6 +3,7 @@ $color: rgb(114, 189, 0);
 body#home {
   background-image: url('../assets/bg.png');
   background-size: cover;
+  background-attachment: fixed;
   font-family: 'Permanent Marker', cursive;
 }
 
@@ -47,12 +48,13 @@ body#home {
 
 .track {
   width: 500px;
-  height: 150px;
+  height: 175px;
   vertical-align: middle;
   display: inline-block;
   background-color: $color;
   border: 4px outset $color;
   margin: 5px;
+  font-family: 'Coming Soon';
   p { margin: 1px }
 }
 
@@ -79,4 +81,38 @@ body#home {
   width: 80%;
   vertical-align: top;
   float: right;
+}
+
+.no-events {
+  #playlist, #tracks { display: none }
+  #event-form {
+    .header { margin-bottom: 10px }
+    h1 { 
+      text-align: center;
+      font-size: 45px;
+      margin: 0;
+    }
+    width: 50%;
+    height: 420px;
+    margin: auto;
+    margin-top: 100px;
+    border: 4px solid black;
+    border-radius: 10px;
+    background-color: rgba(14,36,62,0.7);
+    input, button {
+      display: block;
+      font-size: 3em;
+      margin: 10px auto;
+      text-align: center;
+      font-family: 'Coming Soon';
+    }
+    button {
+      font-family: 'Permanent Marker';
+      border: none;
+      width: 300px;
+      padding: 7px;
+      border-radius: 40px;
+      background-color: #FFA400;
+    }
+  }
 }
