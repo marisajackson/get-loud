@@ -35,7 +35,6 @@
           return auth;
         });
       } else {
-        // render initial screen
         return auth;
       }
     }

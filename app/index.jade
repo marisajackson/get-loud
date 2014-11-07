@@ -2,7 +2,8 @@ doctype html
 html(ng-app='getLOUD')
   meta(charset='utf-8')
   title getLOUD
-link(href='http://fonts.googleapis.com/css?family=Permanent+Marker|Coming+Soon' rel='stylesheet' type='text/css')  
+link(href='http://fonts.googleapis.com/css?family=Permanent+Marker|Open+Sans' rel='stylesheet' type='text/css')  
+link(rel="stylesheet" type="text/css" href="/assets/font-awesome-4.2.0/css/font-awesome.min.css")
 link(href='css/style.css', rel='stylesheet')
 body#home(ng-controller='viewCtrl as view')
   #logged-out(ng-hide='view.loggedIn()')
@@ -42,14 +43,13 @@ body#home(ng-controller='viewCtrl as view')
 
       #tracks
         //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
-        .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
+        .track(ng-repeat='track in tracks | orderBy: "track.event.date"' ng-hide='track.addedToPlaylist')
           img.artist-image(ng-src='{{track.artistImage}}')
           .track-info
-            p Artist: {{track.artist}}
-            p Song: {{track.name}}
-            p Event Info:
-            p Date: {{track.event.date | date:'medium'}}
-            p Venue: {{track.event.venue}}
+            p.artist {{track.artist}}
+            p
+              i.fa.fa-calendar {{ track.event.date | date:'medium'}}
+            p @ {{track.event.venue}}
             a(ng-href='{{track.event.ticket}}') Get Tickets
             #links
               button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
