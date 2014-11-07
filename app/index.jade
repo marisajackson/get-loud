@@ -43,12 +43,12 @@ body#home(ng-controller='viewCtrl as view')
 
       #tracks
         //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
-        .track(ng-repeat='track in tracks | orderBy: "track.event.date"' ng-hide='track.addedToPlaylist')
+        .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
           img.artist-image(ng-src='{{track.artistImage}}')
           .track-info
             p.artist {{track.artist}}
             p
-              i.fa.fa-calendar {{ track.event.date | date:'medium'}}
+              i.fa.fa-calendar &nbsp {{ track.event.date | date:'medium'}}
             p @ {{track.event.venue}}
             a(ng-href='{{track.event.ticket}}') Get Tickets
             #links
