@@ -44,18 +44,24 @@ body#home(ng-controller='viewCtrl as view')
       #tracks
         //- .track(ng-repeat='track in list | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage' ng-hide='track.addedToPlaylist')
         .track(ng-repeat='track in tracks' ng-hide='track.addedToPlaylist')
-          img.artist-image(ng-src='{{track.artistImage}}')
+          .image-container
+            .artist-image
+              img(ng-src='{{track.artistImage}}')
+            .overlay
+              button.song-controls(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()')
+                i.fa.fa-play
+              button.add-song(ng-click='addToPlaylist(track)')
+                i.fa.fa-plus
           .track-info
             p.artist {{track.artist}}
             p
               i.fa.fa-calendar &nbsp {{ track.event.date | date:'medium'}}
             p @ {{track.event.venue}}
             a(ng-href='{{track.event.ticket}}') Get Tickets
-            #links
-              button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
-              button(ng-click='addToPlaylist(track)') Add
-        //- button(ng-click="pagination.prevPage()") Previous
-        //- button(ng-click="pagination.nextPage()") Next
+            //- #links
+            //-   button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
+            //-   button(ng-click='addToPlaylist(track)') Add
+
   #success
 
 script(src='js/vendor/angular/angular.min.js')

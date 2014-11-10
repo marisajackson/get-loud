@@ -48,9 +48,53 @@ i {
   margin-top: 100px;
 }
 
-.artist-image {
-  max-width: 100%;
+.image-container {
+  display: block;
+  max-width: 269px;
   height: 269px;
+}
+
+.artist-image {
+  width: 269px;
+  height: 269px;
+  z-index: 1;
+  position: absolute;
+  img { 
+    max-width: 100%;
+    height: 100%;
+  }
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(55, 55, 55, 0.5);
+  height: 269px;
+  width: 269px;
+}
+
+.image-container:hover {
+  .artist-image { z-index: 0 }
+}
+
+.overlay button {
+  font-size: 66px;
+  // border: 4px solid white;
+  // border-radius: 50px;
+  border: none;
+  height: 100px;
+  width: 100px;
+  background: none;
+  color: white;
+  margin-top: 80px;
+  outline: none;
+}
+
+.song-controls {
+  padding-left: 18px;
+}
+
+.add-song:hover {
+  color: #FFA400;
 }
 
 .track {
