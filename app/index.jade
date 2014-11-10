@@ -49,7 +49,7 @@ body#home(ng-controller='viewCtrl as view')
               img(ng-src='{{track.artistImage}}')
             .overlay
               button.song-controls(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()')
-                i.fa.fa-play
+                i.fa(ng-class='track.songPreview.paused ? "fa-play" : "fa-pause"')
               button.add-song(ng-click='addToPlaylist(track)')
                 i.fa.fa-plus
           .track-info
