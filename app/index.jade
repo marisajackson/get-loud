@@ -52,12 +52,15 @@ body#home(ng-controller='viewCtrl as view')
                 i.fa(ng-class='track.songPreview.paused ? "fa-play" : "fa-pause"')
               button.add-song(ng-click='addToPlaylist(track)')
                 i.fa.fa-plus
+              p.track-name {{track.name}}
           .track-info
             p.artist {{track.artist}}
             p
               i.fa.fa-calendar &nbsp {{ track.event.date | date:'medium'}}
             p @ {{track.event.venue}}
-            a(ng-href='{{track.event.ticket}}') Get Tickets
+            a.ticket-link(ng-href='{{track.event.ticket}}' target='_blank')
+              i.fa.fa-ticket
+              span Get Tickets
             //- #links
             //-   button(ng-click='track.songPreview.paused ? track.songPreview.play() : track.songPreview.pause()') Play
             //-   button(ng-click='addToPlaylist(track)') Add

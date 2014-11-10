@@ -65,9 +65,18 @@ i {
   }
 }
 
+.ticket-link {
+  text-decoration: none;
+  color: white;
+}
+
+.ticket-link:hover {
+  color: #FFA400;
+}
+
 .overlay {
   position: absolute;
-  background-color: rgba(55, 55, 55, 0.5);
+  background-color: rgba(55, 55, 55, 0.7);
   height: 269px;
   width: 269px;
 }
@@ -87,14 +96,11 @@ i {
   color: white;
   margin-top: 80px;
   outline: none;
+  :hover { color: #FFA400 }
 }
 
 .song-controls {
   padding-left: 18px;
-}
-
-.add-song:hover {
-  color: #FFA400;
 }
 
 .track {
